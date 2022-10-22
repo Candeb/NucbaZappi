@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="styles.css" />
-    <title>E5</title>
+    <title>NucbaZappi</title>
   </head>
   <body>
     <div class="section-container header-container">
@@ -23,7 +23,7 @@
             </div>
 
             <!-- CARRITO -->
-            <div class="cart">
+            <div class="cart hidden">
               <button class="button btn-closeCart">x</button>
               <h3>Tus Productos</h3>
               <div class="cart-productsContainer">
@@ -105,41 +105,43 @@
 
         <!--RECOMENDADOS-->
         <section class="section-container">
+          <div class="recomendadosContainer">
             <h2>Hoy te recomendamos</h2>
-    
+
             <div class="recommendContainer">
-                <div class="recommendCard">
-                    <img class="recommendImg" src="./assets/Bennaziana.png">
-                    <div class="recommendText">
-                        <p class="recommendTitle">Bennaziana</p>
-                        <p class="recommendDescription">La más completa</p>
-                        <p class="recommendPrice">$ 3650</p>
-                    </div>
-                    <button class="addBtn">Agregar</button>
+              <div class="recommendCard">
+                <img class="recommendImg" src="./assets/Bennaziana.png" />
+                <div class="recommendText">
+                  <p class="recommendTitle">Bennaziana</p>
+                  <p class="recommendDescription">La más completa</p>
+                  <p class="recommendPrice">$ 3650</p>
                 </div>
-    
-                <div class="recommendCard">
-                    <img class="recommendImg" src="./assets/Tronco-Pizza.png">
-                    <div class="recommendText">
-                        <p class="recommendTitle">Tronco-Pizza</p>
-                        <p class="recommendDescription">Para todo el dia</p>
-                        <p class="recommendPrice">$ 870</p>
-                    </div>
-                    <button class="addBtn">Agregar</button>
+                <button class="addBtn">Agregar</button>
+              </div>
+
+              <div class="recommendCard">
+                <img class="recommendImg" src="./assets/Tronco-Pizza.png" />
+                <div class="recommendText">
+                  <p class="recommendTitle">Tronco-Pizza</p>
+                  <p class="recommendDescription">Para todo el dia</p>
+                  <p class="recommendPrice">$ 870</p>
                 </div>
-    
-                <div class="recommendCard">
-                    <img class="recommendImg" src="./assets/Papas Provenzal.png">
-                    <div class="recommendText">
-                        <p class="recommendTitle">Papas | Provenzal</p>
-                        <p class="recommendDescription">Van como piña</p>
-                        <p class="recommendPrice">$ 360</p>
-                    </div>
-                    <button class="addBtn">Agregar</button>
-                </div>   
+                <button class="addBtn">Agregar</button>
+              </div>
+
+              <div class="recommendCard">
+                <img class="recommendImg" src="./assets/Papas Provenzal.png" />
+                <div class="recommendText">
+                  <p class="recommendTitle">Papas | Provenzal</p>
+                  <p class="recommendDescription">Van como piña</p>
+                  <p class="recommendPrice">$ 360</p>
+                </div>
+                <button class="addBtn">Agregar</button>
+              </div>
             </div>
+          </div>
         </section>
-        
+
         <!--CATEGORIAS-->
         <section class="section-container">
           <div class="categoryContainer">
@@ -205,8 +207,115 @@
             </div>
           </div>
         </section>
-        <section class="section-container">Categorias</section>
-        <section class="section-container">Populares</section>
+        <section class="section--container">
+          <h3>Los más populares</h3>
+          <div class="populares--container">
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>La Mr. Pit</h4>
+                  <p>Solo para expertos</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$350</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>¡Q'Jamone!</h4>
+                  <p>c/jamón crudo</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$350</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>La Charly García</h4>
+                  <p>¡BASTA!</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$380</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>La Maradona</h4>
+                  <p>¡Eterna!</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$450</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>Picantovich</h4>
+                  <p>Pica 2 veces</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$750</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>La Hasbulla</h4>
+                  <p>En honor al 1</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$990</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>Leo Messi</h4>
+                  <p>¡De pié señores!</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$10</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+            <div class="card--container">
+              <div class="card">
+                <div class="front--image"></div>
+                <div class="card--body">
+                  <h4>Nick Gi</h4>
+                  <p>La que desaparece</p>
+                </div>
+                <div class="card--pricing">
+                  <span>$ Gratis</span>
+                  <button type="button">Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 

@@ -263,6 +263,15 @@ main {
   color: var(--white)
 }
 
+.recomendadosContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 40px;
+  width: 90%;
+}
+
 .recommendContainer {
   display: flex;
   flex-wrap: wrap;
@@ -282,7 +291,7 @@ main {
   padding: 0 1rem;
   gap: 0.2rem;
   border-radius: 1rem;
-  background-color: var(--blackish);
+  background-color: var(--black);
 }
 
 .recommendText {
@@ -310,8 +319,9 @@ main {
   font-weight: 700;
   font-size: clamp(1rem, 1.5vw, 1.2rem); 
   background: var(--gradient);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 .addBtn {
@@ -517,6 +527,87 @@ main {
   border-radius: 4px;
 }
 
+/* SECCION POPULARES */
+
+
+.populares--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 60px;
+  margin-left: 10px;
+}
+
+.card--container {
+  display: flex;
+  flex: 1 0 200px;
+  align-items: center;
+  color: white;
+  max-width: 282px;
+  height: 213px;
+  border-radius: 15px;
+  background-color: var(--black);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 20px;
+}
+
+.card .front--image {
+  max-width: 237px;
+  height: 97px;
+  border-radius: 16px;
+  border: 1px solid red;
+}
+
+.card--body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.card--pricing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+}
+
+.card h4 {
+  font-size: 15px;
+  color: var(--white);
+}
+
+.card p {
+  color: gray;
+  font-size: 14px;
+}
+
+.card span {
+  background-image: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.card button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 17px;
+  padding: 5px 15px;
+  background-image: var(--gradient);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 12px;
+}
 
 
 /* inicio footer */
@@ -551,3 +642,7 @@ footer {
   }
 }
 /* fin footer */
+
+.hidden {
+  display: none;
+}
