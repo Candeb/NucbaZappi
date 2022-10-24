@@ -6,7 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="styles.css" />
-    <title>E5</title>
+    <title>NucbaZappi</title>
+    <link rel="icon" href="assets/nucbazappiicon 1.png" />
+
+    <!-- AGREGAMOS CDN DE FONT-AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="section-container header-container">
@@ -16,11 +26,72 @@
         </div>
 
         <nav class="navbar">
-          <ul class="navbar-ul-container">
-            <li><img src="assets/Icon Home Active.png" alt="" /></li>
-            <li><img src="assets/Icon Cart.png" alt="" /></li>
-            <li><img src="assets/Group 824.png" alt="" /></li>
-          </ul>
+          <div class="navbar-ul-container">
+            <i class="fa-solid fa-house navIcon"><span>Home</span></i>
+            <div class="cart-label navElement">
+              <i
+                class="fa-solid fa-cart-shopping navIcon"
+                alt="Icono de Carrito"
+              ></i>
+            </div>
+            <i class="fa-solid fa-circle-user navIcon"></i>
+          </div>
+
+          <!-- CARRITO -->
+          <div class="cart hidden">
+            <button class="button btn-closeCart">x</button>
+            <h3>Tus Productos</h3>
+            <div class="cart-productsContainer">
+              <div class="cart-product">
+                <img src="assets/burger 1.png" alt="" />
+                <div class="cart-productDetalle">
+                  <h4>Nombre Comida</h4>
+                  <p>Descripción</p>
+                  <precio></precio>
+                </div>
+                <div class="cart-cantidadDetalle">
+                  <button class="button btn-menosUno">-</button>
+                  <p>12</p>
+                  <button class="button btn-masUno">+</button>
+                </div>
+              </div>
+              <div class="cart-product">
+                <img src="assets/float 1.png" alt="" />
+                <div class="cart-productDetalle">
+                  <h4>Nombre Comida</h4>
+                  <p>Descripción</p>
+                  <precio></precio>
+                </div>
+                <div class="cart-cantidadDetalle">
+                  <button class="button btn-menosUno">-</button>
+                  <p>12</p>
+                  <button class="button btn-masUno">+</button>
+                </div>
+              </div>
+            </div>
+            <li><img src="assets/account.png" alt="" /></li>
+
+            <div class="cart-costoInfo">
+              <div class="subLine">
+                <h4>Subtotal:</h4>
+                <span class="subtotal">$1.200,00</span>
+              </div>
+              <div class="subLine">
+                <h4>Envío:</h4>
+                <span class="envio">Gratis</span>
+              </div>
+              <span class="separator"></span>
+              <div class="subLine">
+                <h3>Total:</h3>
+                <span class="total">$1.200,00</span>
+              </div>
+            </div>
+            <div class="cart-buttonContainer">
+              <button class="button btn-buy">COMPRAR</button>
+              <button class="btn-verMas">Ver más productos</button>
+            </div>
+          </div>
+          <div class="overlay"></div>
         </nav>
       </header>
 
@@ -46,11 +117,93 @@
             </div>
           </article>
         </section>
-        <section class="section-container">Recomendado</section>
-        <section class="section-container">Categorias</section>
-        <section class="section-container">Populares</section>
+
+        <!--RECOMENDADOS-->
+        <section class="section-container">
+          <div class="recomendadosContainer">
+            <h2>Hoy te recomendamos</h2>
+
+            <div class="recommendContainer"></div>
+          </div>
+        </section>
+
+        <!--CATEGORIAS-->
+        <section class="section-container">
+          <div class="categoryContainer">
+            <div class="catTitle">
+              <h4>Categorías</h4>
+            </div>
+            <div class="catCardContainer">
+              <div class="catCard category catActive" data-category="populares">
+                <div class="catImg">
+                  <img src="assets/pizza 2.png" />
+                </div>
+                <p>Populares</p>
+                <div class="colorDetail"></div>
+              </div>
+
+              <div class="catCard category" data-category="Pizzas">
+                <div class="catImg">
+                  <img src="assets/image 34.png" />
+                </div>
+                <p>Pizzas</p>
+                <div class="colorDetail"></div>
+              </div>
+
+              <div class="catCard category" data-category="Hamburguesas">
+                <div class="catImg">
+                  <img src="assets/burger 1.png" />
+                </div>
+                <p>Hamburguesas</p>
+                <div class="colorDetail"></div>
+              </div>
+
+              <div class="catCard category" data-category="Papas">
+                <div class="catImg">
+                  <img src="assets/fries 2.png" />
+                </div>
+                <p>Napapuki</p>
+                <div class="colorDetail"></div>
+              </div>
+
+              <div class="catCard category" data-category="Wraps">
+                <div class="catImg">
+                  <img src="assets/buritto 1.png" />
+                </div>
+                <p>Wraps</p>
+                <div class="colorDetail"></div>
+              </div>
+
+              <div class="catCard category" data-category="Mexican">
+                <div class="catImg">
+                  <img src="assets/taco 1.png" />
+                </div>
+                <p>Mexican Food</p>
+                <div class="colorDetail"></div>
+              </div>
+
+              <div class="catCard category" data-category="Batidos">
+                <div class="catImg">
+                  <img src="assets/float 1.png" />
+                </div>
+                <p>Batidos</p>
+                <div class="colorDetail"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- POPULARES -->
+        <section class="section--container filter-card-container">
+          <div class="populares-section">
+            <h3 class="prodSubTitle">Los más populares</h3>
+            <div class="populares--container"></div>
+          </div>
+        </section>
       </main>
     </div>
+
+    <!-- Footer -->
 
     <div class="section-container">
       <footer>
@@ -69,5 +222,9 @@
         </div>
       </footer>
     </div>
+
+    <script src="data.js"></script>
+    <script src="utils.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
