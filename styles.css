@@ -36,15 +36,6 @@
 }
 
 /* inicio header */
-.section-container {
-  background-color: var(--background);
-}
-
-.header-container {
-  top: 0%;
-  z-index: 999;
-  width: 100%;
-}
 
 .header {
   margin: 0 auto;
@@ -118,8 +109,9 @@ main {
   margin: 0 auto;
   width: 100%;
   gap: 30px;
-
+  background-color: var(--background);
   padding: 0px 120px;
+  color: var(--white);
 }
 /* fin main */
 
@@ -251,16 +243,12 @@ main {
 
 /* Estándar para todas las secciones */
 .section-container {
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 20px;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   /* padding: 20px; */
+  background-color: var(--background);
 }
 
 /*********recomendaciones*********/
@@ -775,6 +763,11 @@ footer {
 
 .show-overlay {
   display: block;
+}
+
+.disabled {
+  background-color: #968e8e;
+  color: white;
 }
 /* fin clases carrito */
 

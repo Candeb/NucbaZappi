@@ -19,7 +19,7 @@
     />
   </head>
   <body>
-    <div class="section-container header-container">
+    <div class="section-container">
       <header class="header">
         <div class="logo-container">
           <img src="assets/nucbazappiicon 1.png" alt="Logo de Pizza" />
@@ -43,33 +43,19 @@
             <h3>Tus Productos</h3>
             <div class="cart-productsContainer">
               <div class="cart-product">
-                <img src="assets/burger 1.png" alt="" />
+                <img src="${image}" alt="Foto ilustrativa de ${nombre}" />
                 <div class="cart-productDetalle">
-                  <h4>Nombre Comida</h4>
-                  <p>Descripción</p>
-                  <precio></precio>
+                  <h4>${nombre}</h4>
+                  <p>${descripcion}</p>
+                  <p>${precio}</p>
                 </div>
                 <div class="cart-cantidadDetalle">
-                  <button class="button btn-menosUno">-</button>
-                  <p>12</p>
-                  <button class="button btn-masUno">+</button>
-                </div>
-              </div>
-              <div class="cart-product">
-                <img src="assets/float 1.png" alt="" />
-                <div class="cart-productDetalle">
-                  <h4>Nombre Comida</h4>
-                  <p>Descripción</p>
-                  <precio></precio>
-                </div>
-                <div class="cart-cantidadDetalle">
-                  <button class="button btn-menosUno">-</button>
-                  <p>12</p>
-                  <button class="button btn-masUno">+</button>
+                  <button class="button btn-menosUno" data-id="${id}">-</button>
+                  <p>${cantidad}</p>
+                  <button class="button btn-masUno data-id=${id}">+</button>
                 </div>
               </div>
             </div>
-            <li><img src="assets/account.png" alt="" /></li>
 
             <div class="cart-costoInfo">
               <div class="subLine">
@@ -87,16 +73,17 @@
               </div>
             </div>
             <div class="cart-buttonContainer">
-              <button class="button btn-buy">COMPRAR</button>
+              <button class="button btn-buy" id="btn-buy">COMPRAR</button>
               <button class="btn-verMas">Ver más productos</button>
             </div>
           </div>
           <div class="overlay"></div>
         </nav>
       </header>
-
-      <main>
-        <!--HERO SECTION-->
+    </div>
+    <main>
+      <!--HERO SECTION-->
+      <div class="section-container">
         <section class="hero-section-container">
           <article class="text-container">
             <div class="title-container">
@@ -117,91 +104,90 @@
             </div>
           </article>
         </section>
+      </div>
+      <!--RECOMENDADOS-->
+      <section class="section-container">
+        <div class="recomendadosContainer">
+          <h2>Hoy te recomendamos</h2>
 
-        <!--RECOMENDADOS-->
-        <section class="section-container">
-          <div class="recomendadosContainer">
-            <h2>Hoy te recomendamos</h2>
+          <div class="recommendContainer"></div>
+        </div>
+      </section>
 
-            <div class="recommendContainer"></div>
+      <!--CATEGORIAS-->
+      <section class="section-container">
+        <div class="categoryContainer">
+          <div class="catTitle">
+            <h4>Categorías</h4>
           </div>
-        </section>
-
-        <!--CATEGORIAS-->
-        <section class="section-container">
-          <div class="categoryContainer">
-            <div class="catTitle">
-              <h4>Categorías</h4>
+          <div class="catCardContainer">
+            <div class="catCard category catActive" data-category="populares">
+              <div class="catImg">
+                <img src="assets/pizza 2.png" />
+              </div>
+              <p>Populares</p>
+              <div class="colorDetail"></div>
             </div>
-            <div class="catCardContainer">
-              <div class="catCard category catActive" data-category="populares">
-                <div class="catImg">
-                  <img src="assets/pizza 2.png" />
-                </div>
-                <p>Populares</p>
-                <div class="colorDetail"></div>
-              </div>
 
-              <div class="catCard category" data-category="Pizzas">
-                <div class="catImg">
-                  <img src="assets/image 34.png" />
-                </div>
-                <p>Pizzas</p>
-                <div class="colorDetail"></div>
+            <div class="catCard category" data-category="Pizzas">
+              <div class="catImg">
+                <img src="assets/image 34.png" />
               </div>
+              <p>Pizzas</p>
+              <div class="colorDetail"></div>
+            </div>
 
-              <div class="catCard category" data-category="Hamburguesas">
-                <div class="catImg">
-                  <img src="assets/burger 1.png" />
-                </div>
-                <p>Hamburguesas</p>
-                <div class="colorDetail"></div>
+            <div class="catCard category" data-category="Hamburguesas">
+              <div class="catImg">
+                <img src="assets/burger 1.png" />
               </div>
+              <p>Hamburguesas</p>
+              <div class="colorDetail"></div>
+            </div>
 
-              <div class="catCard category" data-category="Papas">
-                <div class="catImg">
-                  <img src="assets/fries 2.png" />
-                </div>
-                <p>Napapuki</p>
-                <div class="colorDetail"></div>
+            <div class="catCard category" data-category="Papas">
+              <div class="catImg">
+                <img src="assets/fries 2.png" />
               </div>
+              <p>Napapuki</p>
+              <div class="colorDetail"></div>
+            </div>
 
-              <div class="catCard category" data-category="Wraps">
-                <div class="catImg">
-                  <img src="assets/buritto 1.png" />
-                </div>
-                <p>Wraps</p>
-                <div class="colorDetail"></div>
+            <div class="catCard category" data-category="Wraps">
+              <div class="catImg">
+                <img src="assets/buritto 1.png" />
               </div>
+              <p>Wraps</p>
+              <div class="colorDetail"></div>
+            </div>
 
-              <div class="catCard category" data-category="Mexican">
-                <div class="catImg">
-                  <img src="assets/taco 1.png" />
-                </div>
-                <p>Mexican Food</p>
-                <div class="colorDetail"></div>
+            <div class="catCard category" data-category="Mexican">
+              <div class="catImg">
+                <img src="assets/taco 1.png" />
               </div>
+              <p>Mexican Food</p>
+              <div class="colorDetail"></div>
+            </div>
 
-              <div class="catCard category" data-category="Batidos">
-                <div class="catImg">
-                  <img src="assets/float 1.png" />
-                </div>
-                <p>Batidos</p>
-                <div class="colorDetail"></div>
+            <div class="catCard category" data-category="Batidos">
+              <div class="catImg">
+                <img src="assets/float 1.png" />
               </div>
+              <p>Batidos</p>
+              <div class="colorDetail"></div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- POPULARES -->
-        <section class="section--container filter-card-container">
-          <div class="populares-section">
-            <h3 class="prodSubTitle">Los más populares</h3>
-            <div class="populares--container"></div>
-          </div>
-        </section>
-      </main>
-    </div>
+      <!-- POPULARES -->
+      <section class="section-container filter-card-container">
+        <div class="populares-section">
+          <h3 class="prodSubTitle">Los más populares</h3>
+          <div class="populares--container"></div>
+        </div>
+      </section>
+    </main>
 
     <!-- Footer -->
 

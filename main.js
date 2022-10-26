@@ -6,23 +6,31 @@ const recomendados = document.querySelector('.recommendContainer');
 const categories = document.querySelector('.categoryContainer');
 // Lista de categorías
 const categoryList = document.querySelectorAll('.category');
-//Abrir el carrito
-const cartButton = document.querySelector('.cart-label');
-// cerrar carrito
-const cartHidden = document.querySelector('.btn-closeCart');
-// carrito
-const cartActive = document.querySelector('.cart');
-// overlay
-const divOverlay = document.querySelector('.overlay');
-//Con esto modificamos el nombre de la sección elegida en categorías (por defecto es los más populares)
+// Con esto modificamos el nombre de la sección elegida en categorías (por defecto es los más populares)
 const tituloCategoria = document.querySelector('.prodSubTitle');
+// Abrir el carrito
+const cartButton = document.querySelector('.cart-label');
+// Cerrar carrito
+const cartHidden = document.querySelector('.btn-closeCart');
+// Carrito
+const cartActive = document.querySelector('.cart');
+// Overlay
+const divOverlay = document.querySelector('.overlay');
+// Contenedor de productos del carrito
+const productsCart = document.querySelector('.cart-productsContainer');
+// span a rellenar con el total
+const total = document.querySelector('.subtotal');
+// boton comprar
+const buyBtn = document.getElementById('btn-buy');
+// boton agregar
+const addBtn = document.querySelector('addBtn');
 
 //Declaramos lo que va a tener el carrito, ya sea un array vacío o lo que traiga del LS
-let cart = JSON.parse(localStorage.getItem('Cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 //Esta función lo que hace es guardar el carrito al LS
 const saveToLS = (fullCart) => {
-  localStorage.setItem('Cart', JSON.stringify(fullCart));
+  localStorage.setItem('cart', JSON.stringify(fullCart));
 };
 
 // Función general que recibe un id y una lista de productos, y en base a eso realiza un filtro y te devuelve el producto deseado
@@ -107,7 +115,7 @@ const renderProduct = (product) => {
         </div>
         <div class="card--pricing">
             <span>$${precio}</span>
-        <button type="button" class="addBtn">Agregar</button>
+        <button type="button" class="addBtn" data-id="${id}" data-name="${nombre}" data-bid="${precio}" data-img="${image}">Agregar</button>
         </div>
     </div>
 `;
@@ -155,14 +163,118 @@ const filterCategory = (e) => {
   }
 };
 
+// Funciones para abrir y cerrar carrito segun corresponda
+
+const closeCart = (e) => {
+  if (e.target.classList.contains('active')) return;
+  cartActive.classList.toggle('active');
+  divOverlay.classList.toggle('show-overlay');
+};
+
 const toggleCart = () => {
   cartActive.classList.toggle('active');
   divOverlay.classList.toggle('show-overlay');
 };
 
-const closeCart = () => {
+const closeOnScroll = () => {
+  if (!cartActive.classList.contains('active')) return;
   cartActive.classList.remove('active');
-  divOverlay.classList.toggle('show-overlay');
+  divOverlay.classList.remove('show-overlay');
+};
+
+const closeOnDivOverlayClick = () => {
+  cartActive.classList.remove('active');
+  divOverlay.classList.remove('show-overlay');
+};
+
+// Funciones para el manejo del carrito
+
+const renderCartProduct = (cartProduct) => {
+  const { id, nombre, descripcion, precio, cantidad, image } = cartProduct;
+  return ` 
+  <div class="cart-product">
+                <img src=${image} alt="Foto ilustrativa de ${nombre}" />
+                <div class="cart-productDetalle">
+                  <h4>${nombre}</h4>
+                  <p>${descripcion}</p>
+                  <p>${precio}</p>
+                </div>
+                <div class="cart-cantidadDetalle">
+                  <button class="button btn-menosUno" data-id=${id}>-</button>
+                  <p>${cantidad}</p>
+                  <button class="button btn-masUno  data-id=${id}">+</button>
+                </div>
+</div>   
+  `;
+};
+
+const renderCart = () => {
+  if (!cart.length) {
+    productsCart.innerHTML = `
+    <p class"empty-cart">No hay productos en el carrito.</p>`;
+    return;
+  }
+  productsCart.innerHTML = cart.map(renderCartProduct).join('');
+};
+
+const calculateTotalCart = () => {
+  return cart.reduce(
+    (arr, cur) => acc + Number(cur.precio) * Number(cur.cantidad),
+    0
+  );
+};
+
+const showTotal = () => {
+  total.innerHTML = `
+  ${calculateTotalCart().toFixed(2)} $`;
+};
+
+const disableButton = (button) => {
+  if (!cart.length) {
+    button.classList.toggle('button');
+    button.classList.add('disabled');
+    return;
+  }
+  button.classList.remove('disabled');
+};
+
+const addUnit = (product) => {
+  cart = cart.map((cartProduct) => {
+    return cartProduct.id === product.id
+      ? { ...cartProduct, cantidad: cartProduct.cantidad + 1 }
+      : cartProduct;
+  });
+};
+
+const createCartProduct = (product) => {
+  return (cart = [...cart, { ...product, cantidad: 1 }]);
+};
+
+const productData = (id, nombre, precio, image) => {
+  return { id, nombre, precio, image };
+};
+
+const isExistingCartProduct = (product) => {
+  return cart.find((item) => item.id === product.id);
+};
+
+const checkCartState = () => {
+  saveToLS(cart);
+  renderCart(cart);
+  showTotal(cart);
+  disableButton(buyBtn);
+};
+
+const addProduct = (e) => {
+  if (!e.target.classList.contains('addBtn')) return;
+  const { id, nombre, precio, image } = e.target.dataset;
+  const product = productData(id, nombre, precio, image);
+  if (isExistingCartProduct(product)) {
+    addUnit(product);
+  } else {
+    createCartProduct(product);
+  }
+  checkCartState;
 };
 
 //Esta función va a contener todas aquellas funciones que necesitemos ejecutar de forma conjunta y nos permita ahorra código
@@ -173,9 +285,14 @@ const init = () => {
   renderRecomendados(productsArray);
   renderProductos(products, productsArray, 'populares');
   categories.addEventListener('click', filterCategory);
-
   cartButton.addEventListener('click', toggleCart);
   cartHidden.addEventListener('click', closeCart);
+  window.addEventListener('scroll', closeOnScroll);
+  divOverlay.addEventListener('click', closeOnDivOverlayClick);
+  document.addEventListener('DOMContentLoaded', renderCart);
+  document.addEventListener('DOMContentLoaded', showTotal);
+  products.addEventListener('click', addProduct);
+  disableButton(buyBtn);
 };
 
 init();
