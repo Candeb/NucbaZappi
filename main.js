@@ -237,7 +237,6 @@ const disableButton = (button) => {
   }
   button.classList.remove('disabled');
 };
-
 const addUnit = (product) => {
   cart = cart.map((cartProduct) => {
     return cartProduct.id === product.id
@@ -245,24 +244,16 @@ const addUnit = (product) => {
       : cartProduct;
   });
 };
-
-const createCartProduct = (product) => {
-  return (cart = [...cart, { ...product, cantidad: 1 }]);
-};
-
 const productData = (id, nombre, precio, image) => {
   return { id, nombre, precio, image };
 };
 
 const isExistingCartProduct = (product) => {
-  return cart.find((item) => item.id === product.id);
+  cart.find((item) => item.id === product.id);
 };
 
-const checkCartState = () => {
-  saveToLS(cart);
-  renderCart(cart);
-  showTotal(cart);
-  disableButton(buyBtn);
+const createCartProduct = (product) => {
+  cart = [...cart, { ...product, cantidad: 1 }];
 };
 
 const addProduct = (e) => {
@@ -274,7 +265,6 @@ const addProduct = (e) => {
   } else {
     createCartProduct(product);
   }
-  checkCartState;
 };
 
 //Esta función va a contener todas aquellas funciones que necesitemos ejecutar de forma conjunta y nos permita ahorra código
