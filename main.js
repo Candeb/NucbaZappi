@@ -1,9 +1,12 @@
 // Contenedor de productos donde se van a renderizar
 const products = document.querySelector('.populares--container');
+
 // Contenedor de productos recomendados donde se van a renderizar
 const recomendados = document.querySelector('.recommendContainer');
+
 // Categorias que se van a ir pulsando y se van a aplicar los filtros
 const categories = document.querySelector('.categoryContainer');
+
 // Lista de categorías
 const categoryList = document.querySelectorAll('.category');
 // Con esto modificamos el nombre de la sección elegida en categorías (por defecto es los más populares)
@@ -18,12 +21,18 @@ const cartActive = document.querySelector('.cart');
 const divOverlay = document.querySelector('.overlay');
 // Contenedor de productos del carrito
 const productsCart = document.querySelector('.cart-productsContainer');
+// span a rellenar con el subtotal
+const subtotal = document.querySelector('.subtotal');
 // span a rellenar con el total
-const total = document.querySelector('.subtotal');
+const total = document.querySelector('.total');
 // boton comprar
 const buyBtn = document.getElementById('btn-buy');
 // boton agregar
 const addBtn = document.querySelector('addBtn');
+// detalle $ carrito
+const cartDetail = document.querySelector('.cart-costoInfo');
+// header
+const header = document.querySelector('.header');
 
 //Declaramos lo que va a tener el carrito, ya sea un array vacío o lo que traiga del LS
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -50,7 +59,7 @@ const pushToArray = (item, itemsArray) => {
 const renderRecomendado = (product) => {
   'TODO: Definir si el isPopular lo dejamos, o reemplazamos porque lo haga en base al randomizer que armamos para el recomendados';
 
-  console.log(product);
+  // console.log(product);
   const { id, nombre, descripcion, image, categoria, precio } = product;
 
   return `
@@ -61,7 +70,7 @@ const renderRecomendado = (product) => {
                 <p class="recommendDescription">${descripcion}</p>
                 <p class="recommendPrice">$${precio}</p>
             </div>
-            <button type="button" class="addBtn">Agregar</button>
+            <button type="button" class="addBtn" data-id="${id}" data-name="${nombre}" data-bid="${precio}" data-img="${image}" data-descripcion="${descripcion}">Agregar</button>
         </div>
     `;
 };
@@ -115,7 +124,7 @@ const renderProduct = (product) => {
         </div>
         <div class="card--pricing">
             <span>$${precio}</span>
-        <button type="button" class="addBtn" data-id="${id}" data-name="${nombre}" data-bid="${precio}" data-img="${image}">Agregar</button>
+        <button type="button" class="addBtn" data-id="${id}" data-name="${nombre}" data-bid="${precio}" data-img="${image}" data-descripcion="${descripcion}">Agregar</button>
         </div>
     </div>
 `;
@@ -197,12 +206,12 @@ const renderCartProduct = (cartProduct) => {
                 <div class="cart-productDetalle">
                   <h4>${nombre}</h4>
                   <p>${descripcion}</p>
-                  <p>${precio}</p>
+                  <p>$${precio}</p>
                 </div>
                 <div class="cart-cantidadDetalle">
-                  <button class="button btn-menosUno" data-id=${id}>-</button>
+                  <button class="button btn-menosUno down" data-id="${id}">-</button>
                   <p>${cantidad}</p>
-                  <button class="button btn-masUno  data-id=${id}">+</button>
+                  <button class="button btn-masUno up" data-id="${id}">+</button>
                 </div>
 </div>   
   `;
@@ -211,17 +220,24 @@ const renderCartProduct = (cartProduct) => {
 const renderCart = () => {
   if (!cart.length) {
     productsCart.innerHTML = `
-    <p class"empty-cart">No hay productos en el carrito.</p>`;
+    <p class"empty-cart">Todavía no hay productos en el carrito!</p>`;
+    cartDetail.classList.add('hidden');
+    disableButton(buyBtn);
     return;
   }
+  cartDetail.classList.remove('hidden');
   productsCart.innerHTML = cart.map(renderCartProduct).join('');
+  // console.log(productsCart.innerHTML = cart.map(renderCartProduct).join(''));
 };
+console.log(renderCartProduct);
 
 const calculateTotalCart = () => {
-  return cart.reduce(
-    (arr, cur) => acc + Number(cur.precio) * Number(cur.cantidad),
-    0
-  );
+  return cart.reduce((acc, cur) => acc + Number(cur.precio) * cur.cantidad, 0);
+};
+
+const showSubtotal = () => {
+  subtotal.innerHTML = `
+  ${calculateTotalCart().toFixed(2)} $`;
 };
 
 const showTotal = () => {
@@ -231,12 +247,13 @@ const showTotal = () => {
 
 const disableButton = (button) => {
   if (!cart.length) {
-    button.classList.toggle('button');
+    button.classList.togle('button');
     button.classList.add('disabled');
     return;
   }
   button.classList.remove('disabled');
 };
+
 const addUnit = (product) => {
   cart = cart.map((cartProduct) => {
     return cartProduct.id === product.id
@@ -244,27 +261,83 @@ const addUnit = (product) => {
       : cartProduct;
   });
 };
-const productData = (id, nombre, precio, image) => {
-  return { id, nombre, precio, image };
+const productData = (id, nombre, precio, image, descripcion) => {
+  console.log(id, nombre, precio, image, descripcion);
+  return { id, nombre, precio, image, descripcion };
 };
 
 const isExistingCartProduct = (product) => {
-  cart.find((item) => item.id === product.id);
+  return cart.find((item) => item.id === product.id);
 };
 
 const createCartProduct = (product) => {
   cart = [...cart, { ...product, cantidad: 1 }];
+  // console.log(cart = [...cart, { ...product, cantidad: 1 }]);
 };
 
 const addProduct = (e) => {
+  console.log(e.target.classList);
   if (!e.target.classList.contains('addBtn')) return;
-  const { id, nombre, precio, image } = e.target.dataset;
-  const product = productData(id, nombre, precio, image);
+  const { id, name, bid, img, descripcion } = e.target.dataset;
+
+  const product = productData(id, name, bid, img, descripcion);
+  console.log(product);
+
   if (isExistingCartProduct(product)) {
     addUnit(product);
   } else {
     createCartProduct(product);
+    console.log('PASE A CREAR EL PRODUCTO DEL CARRITO');
   }
+  checkCartState();
+};
+
+// + y - del carrito
+
+const removeProductFromCart = (existingProduct) => {
+  cart = cart.filter((product) => product.id !== existingProduct.id);
+  checkCartState();
+};
+
+const substractProductUnit = (existingProduct) => {
+  cart = cart.map((cartProduct) => {
+    return cartProduct.id === existingProduct.id
+      ? { ...cartProduct, cantidad: cartProduct.cantidad - 1 }
+      : cartProduct;
+  });
+};
+
+const handleMinusBtnEvent = (id) => {
+  const existingCartProduct = cart.find((item) => item.id === id);
+  if (existingCartProduct.cantidad === 1) {
+    if (window.confirm('¿Desea eliminar el producto del carrito?')) {
+      removeProductFromCart(existingCartProduct);
+    }
+    return;
+  }
+  substractProductUnit(existingCartProduct);
+};
+
+const handlePlusBtnEvent = (id) => {
+  const existingCartProduct = cart.find((item) => item.id === id);
+  addUnit(existingCartProduct);
+};
+
+const handleQuantity = (e) => {
+  if (e.target.classList.contains('down')) {
+    handleMinusBtnEvent(e.target.dataset.id);
+  } else if (e.target.classList.contains('up')) {
+    handlePlusBtnEvent(e.target.dataset.id);
+  }
+  checkCartState();
+};
+
+// Función para chequear el estado del carrito una vez realizada alguna manipulación del mismo (añadir producto, quitar producto, comprar o vaciar carrito).
+const checkCartState = () => {
+  saveToLS(cart);
+  renderCart(cart);
+  showTotal(cart);
+  disableBtn(buyBtn);
 };
 
 //Esta función va a contener todas aquellas funciones que necesitemos ejecutar de forma conjunta y nos permita ahorra código
@@ -280,9 +353,12 @@ const init = () => {
   window.addEventListener('scroll', closeOnScroll);
   divOverlay.addEventListener('click', closeOnDivOverlayClick);
   document.addEventListener('DOMContentLoaded', renderCart);
+  document.addEventListener('DOMContentLoaded', showSubtotal);
   document.addEventListener('DOMContentLoaded', showTotal);
   products.addEventListener('click', addProduct);
+  recomendados.addEventListener('click', addProduct);
   disableButton(buyBtn);
+  productsCart.addEventListener('click', handleQuantity);
 };
 
 init();
