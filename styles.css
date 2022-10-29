@@ -768,7 +768,6 @@ footer {
 .hidden {
   display: none;
 }
-
 .active {
   display: flex;
   flex-direction: column;
@@ -797,7 +796,7 @@ footer {
 .disabled {
   background-color: #968e8e;
   color: white;
-/*  cursor: not-allowed; */
+ cursor: not-allowed; 
 }
 
 .cart-productsContainer {

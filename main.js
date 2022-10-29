@@ -344,6 +344,7 @@ const handleQuantity = (e) => {
 const checkCartState = () => {
   saveToLS(cart);
   renderCart(cart);
+  showSubtotal(cart);
   showTotal(cart);
   disableButton();
 };
