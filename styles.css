@@ -35,6 +35,25 @@
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
+
+/* CLASES AL CUERPO DE HTML */
+body {
+  background-color: var(--background);
+}
+.body-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  gap: 24px;
+  max-width: 1360px;
+
+  margin: 0 auto;
+}
+
 /* inicio header */
 
 .header {
@@ -46,6 +65,9 @@
   background-color: var(--background);
   height: 116px;
   padding: 24px 74px;
+  position: sticky;
+  top: 0px;
+  z-index: 9999;
 }
 
 .logo-container {
@@ -101,20 +123,6 @@
 
 /* fin header */
 
-/* CLASES AL CUERPO DE HTML */
-body {
-  background-color: var(--background);
-}
-.body-container {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-
-  gap: 24px;
-  max-width: 1360px;
-
-  margin: 0 auto;
-}
 /* inicio main */
 main {
   display: flex;
@@ -792,8 +800,9 @@ footer {
 }
 
 .disabled {
-  background-color: #968e8e;
+  background: var(--gray);
   color: white;
+  cursor: not-allowed;
 }
 .cart-productsContainer {
   display: flex;
