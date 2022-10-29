@@ -121,7 +121,7 @@ const productsArray = [
   {
     id: 14,
     nombre: 'Onion rings',
-    descripcion: 'Para gobernarlos a todos',
+    descripcion: 'La de Frodo',
     image: 'assets/onionRings.png',
     categoria: 'Papas',
     isPopular: 'no',
@@ -229,7 +229,7 @@ const productsArray = [
   {
     id: 26,
     nombre: 'Arcoiris..',
-    descripcion: 'Todos los colores en un solo wrap',
+    descripcion: 'La colorinche',
     image: 'assets/arcoirisWrap.png',
     categoria: 'Wraps',
     isPopular: 'no',

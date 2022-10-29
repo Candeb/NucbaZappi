@@ -35,6 +35,8 @@ const cartDetail = document.querySelector('.cart-costoInfo');
 const header = document.querySelector('.header');
 // div donde se muestra el producto agregado
 const productModal = document.querySelector(".addProductModal")
+//boton para ver mas productos que cierre el cart al apretarlo
+const verMasProd = document.querySelector(".btn-verMas")
 
 //Declaramos lo que va a tener el carrito, ya sea un array vacío o lo que traiga del LS
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -179,11 +181,16 @@ const closeCart = (e) => {
   if (e.target.classList.contains('active')) return;
   cartActive.classList.toggle('active');
   divOverlay.classList.toggle('show-overlay');
+  cartActive.style.opacity = "0"
 };
 
 const toggleCart = () => {
   cartActive.classList.toggle('active');
   divOverlay.classList.toggle('show-overlay');
+  
+  setTimeout(() => {
+    cartActive.style.opacity = "1";
+}, 10);
 };
 
 const closeOnScroll = () => {
@@ -195,6 +202,7 @@ const closeOnScroll = () => {
 const closeOnDivOverlayClick = () => {
   cartActive.classList.remove('active');
   divOverlay.classList.remove('show-overlay');
+  cartActive.style.opacity = "0";
 };
 
 // Funciones para el manejo del carrito
@@ -236,12 +244,14 @@ const calculateTotalCart = () => {
 
 const showSubtotal = () => {
   subtotal.innerHTML = `
-  ${calculateTotalCart().toFixed(2)} $`;
+  ${new Intl.NumberFormat("en-US", { style: 'currency', currency: 'USD' }).format(calculateTotalCart())}`;
 };
 
 const showTotal = () => {
+
   total.innerHTML = `
-  ${calculateTotalCart().toFixed(2)} $`;
+  ${new Intl.NumberFormat("en-US", { style: 'currency', currency: 'USD' }).format(calculateTotalCart())}`;
+
 };
 
 const disableButton = (button) => {
@@ -386,6 +396,7 @@ const init = () => {
   disableButton(buyBtn);
   productsCart.addEventListener('click', handleQuantity);
   buyBtn.addEventListener('click', completarCompra);
+  verMasProd.addEventListener("click", closeCart)
   checkCartState();
 };
 

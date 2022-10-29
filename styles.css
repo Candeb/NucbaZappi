@@ -11,6 +11,10 @@
   font-weight: 200;
 }
 
+html {
+  scroll-behavior: smooth;   scroll-padding-top: 116px; 
+}
+
 /*Variables colores*/
 :root {
   --background: rgba(19, 20, 21, 1);
@@ -69,6 +73,8 @@ body {
   top: 0px;
   z-index: 9999;
 }
+
+.btn-verMas
 
 .logo-container {
   height: 100%;
@@ -492,6 +498,8 @@ main {
   border-top-left-radius: 15px;
   height: 80vh;
   overflow-y: auto;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
 }
 
 .cart h3 {
@@ -850,7 +858,7 @@ footer {
   }
   .populares--container {
     justify-content: space-evenly;
-    padding: 0px;
+    padding: 10px;
   }
 
   /*Cards catalogo*/

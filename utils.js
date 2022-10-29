@@ -47,3 +47,13 @@ const adjustCartHeight = () => {
         cartActive.style.height = "100vh"
     }
 }
+
+//Formatear a estilo pesos
+
+const formatCurrency = (price) => {
+    
+    
+    
+    return formattedPrice
+}
+
