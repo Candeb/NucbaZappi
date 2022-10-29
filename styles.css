@@ -208,7 +208,6 @@ main {
 .hero-button {
   text-transform: uppercase;
   max-width: 166px;
-  text-decoration: none;
 }
 .pizza-container {
   flex: 0 1 300px;
@@ -579,7 +578,6 @@ main {
   color: var(--white);
   border: none;
   cursor: pointer;
-  text-decoration: none;
 }
 
 .btn-closeCart,
@@ -796,9 +794,7 @@ footer {
 .disabled {
   background-color: #968e8e;
   color: white;
- cursor: not-allowed; 
 }
-
 .cart-productsContainer {
   display: flex;
   flex-direction: column;

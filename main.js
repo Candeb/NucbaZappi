@@ -247,11 +247,11 @@ const showTotal = () => {
 
 const disableButton = (button) => {
   if (!cart.length) {
-    button.classList.toggle('button');
+    button.classList.togle('button');
     button.classList.add('disabled');
-  } else {
-    button.classList.remove('disabled');
+    return;
   }
+  button.classList.remove('disabled');
 };
 
 const addUnit = (product) => {
@@ -332,25 +332,16 @@ const handleQuantity = (e) => {
   checkCartState();
 };
 
-//funcion para confirmar la compra
- const completarCompra = () => {
-  if(!cart.length) return;
-  if(window.confirm("¿Deseas finalizar tu compra?"))
-  localStorage.removeItem(cartActive);
-  window.location.reload();
- }
-
 // Función para chequear el estado del carrito una vez realizada alguna manipulación del mismo (añadir producto, quitar producto, comprar o vaciar carrito).
 const checkCartState = () => {
   saveToLS(cart);
   renderCart(cart);
-  showSubtotal(cart);
   showTotal(cart);
-  disableButton();
+  disableBtn(buyBtn);
 };
 
 //Esta función va a contener todas aquellas funciones que necesitemos ejecutar de forma conjunta y nos permita ahorra código
-const refreshData = () => { };
+const refreshData = () => {};
 
 //Arranca el sitio con las funciones requeridas para que la página sea funcional
 const init = () => {
@@ -368,7 +359,6 @@ const init = () => {
   recomendados.addEventListener('click', addProduct);
   disableButton(buyBtn);
   productsCart.addEventListener('click', handleQuantity);
-  buyBtn.addEventListener('click', completarCompra);
 };
 
 init();
