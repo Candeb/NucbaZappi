@@ -33,6 +33,8 @@ const addBtn = document.querySelector('addBtn');
 const cartDetail = document.querySelector('.cart-costoInfo');
 // header
 const header = document.querySelector('.header');
+// div donde se muestra el producto agregado
+const productModal = document.querySelector(".addProductModal")
 
 //Declaramos lo que va a tener el carrito, ya sea un array vacío o lo que traiga del LS
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -278,11 +280,28 @@ const addProduct = (e) => {
 
   if (isExistingCartProduct(product)) {
     addUnit(product);
+    showModal(product);
   } else {
     createCartProduct(product);
+    showModal(product);
   }
   checkCartState();
 };
+
+//Mostrar modal al agregar un producto
+
+const showModal = (product) => {
+
+  productModal.classList.remove("hidden");
+
+  setTimeout(() => {
+    productModal.classList.add("hidden");
+}, 2000);
+
+  return productModal.innerHTML = `
+    El producto "${product.nombre}" fue agregado al carrito.
+  `
+}
 
 // + y - del carrito
 
@@ -343,6 +362,7 @@ const checkCartState = () => {
   renderCart(cart);
   showTotal();
   showSubtotal();
+  adjustCartHeight();
   disableButton(buyBtn);
 };
 
@@ -356,7 +376,7 @@ const init = () => {
   categories.addEventListener('click', filterCategory);
   cartButton.addEventListener('click', toggleCart);
   cartHidden.addEventListener('click', closeCart);
-  window.addEventListener('scroll', closeOnScroll);
+  // window.addEventListener('scroll', closeOnScroll);
   divOverlay.addEventListener('click', closeOnDivOverlayClick);
   document.addEventListener('DOMContentLoaded', renderCart);
   document.addEventListener('DOMContentLoaded', showSubtotal);
@@ -366,6 +386,7 @@ const init = () => {
   disableButton(buyBtn);
   productsCart.addEventListener('click', handleQuantity);
   buyBtn.addEventListener('click', completarCompra);
+  checkCartState();
 };
 
 init();

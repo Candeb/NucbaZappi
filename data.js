@@ -148,7 +148,7 @@ const productsArray = [
   {
     id: 17,
     nombre: 'Vegana',
-    descripcion: 'Por todos los animales sintientes',
+    descripcion: 'Por los animales',
     image: 'assets/veganaBurguer.png',
     categoria: 'Hamburguesas',
     isPopular: 'no',

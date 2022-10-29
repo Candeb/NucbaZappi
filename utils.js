@@ -36,3 +36,14 @@ const setActive = (activeCategory) => {
     })
 
 }
+
+//Ajustar altura carrito
+
+const adjustCartHeight = () => {
+
+    if (!cart.length) {
+        cartActive.style.height = "300px"
+    } else {
+        cartActive.style.height = "100vh"
+    }
+}
